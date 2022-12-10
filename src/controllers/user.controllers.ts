@@ -44,3 +44,31 @@ export const getUser = async(req:Request, res:Response) => {
     }
 
 };
+export const updateUser = async(req:Request, res:Response) => {
+
+
+    try {
+        const {Nombre, Apellido,direccion,telefono,Mail,activo,cumple,id_talle}= req.body;
+        
+        const user = await User.findOneBy({id: parseInt(req.params.id)}) 
+
+        if (!user) return res.status(400).json({message:'El usuario no existe'});
+
+        user.Nombre = Nombre;
+        user.Apellido = Apellido;
+        user.direccion = direccion;
+        user.telefono= telefono;
+        user.Mail = Mail;
+        user.cumple = cumple;
+        user.id_talle = id_talle;
+
+        user.save();
+
+        return res.json("Recibido");
+    } catch (error) {
+        if (error instanceof Error) {
+        return res.status(500).json({message: error.message});
+        }
+    }
+
+};
