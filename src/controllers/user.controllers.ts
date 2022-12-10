@@ -28,5 +28,19 @@ export const createUser = async (req:Request, res: Response ) =>{
         return res.status(500).json({message: error.message});
         }
     }
+
  
+};
+export const getUser = async(req:Request, res:Response) => {
+
+
+    try {
+        const users = await User.find()
+        return res.json(users)
+    } catch (error) {
+        if (error instanceof Error) {
+        return res.status(500).json({message: error.message});
+        }
+    }
+
 };
