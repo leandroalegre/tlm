@@ -29,7 +29,9 @@ export class User extends BaseEntity {
     @Column()
     Mail: string;
 
-    @Column()
+    @Column({
+        default: true,
+    })
     activo: boolean;
 
     @Column()
